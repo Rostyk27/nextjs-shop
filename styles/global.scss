@@ -1,0 +1,22 @@
+// theme variables
+:root {
+  --color-primary: #b8dbd9;
+  --color-secondary: #2f4550;
+  --color-tertiary: #586f7c;
+  --color-text: #000;
+  --color-bg: #f4f4f9;
+  --color-error: #ff3264;
+  --color-success: #39ba37;
+  --family-montserrat: 'Montserrat', sans-serif;
+  --size-base: 16px;
+}
+
+// tailwind default styles
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// theme default styles
+// included in tailwind accordingly
+@import 'base';
+@import 'components';
