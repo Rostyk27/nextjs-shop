@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "name": "Earthen Bottle",
+    "link": "earthen-bottle",
+    "price": 48,
+    "category": "bottle",
+    "inStock": true,
+    "imageSrc": "/images/product-01.jpg",
+    "imageAlt": "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore modi dignissimos deleniti repellat sint ipsum minima quo voluptate. Eaque numquam at vero blanditiis commodi ratione, iure ipsam veritatis? Fuga, illo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam temporibus veritatis odio praesentium maiores possimus amet inventore eius officia voluptatum rerum impedit tenetur ipsam vero blanditiis, soluta assumenda, enim dolorem."
+  },
+  {
+    "id": 2,
+    "name": "Nomad Tumbler",
+    "link": "nomad-tumbler",
+    "price": 35,
+    "category": "bottle",
+    "inStock": false,
+    "imageSrc": "/images/product-02.jpg",
+    "imageAlt": "Olive drab green insulated bottle with flared screw lid and flat top.",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore modi dignissimos deleniti repellat sint ipsum minima quo voluptate. Eaque numquam at vero blanditiis commodi ratione, iure ipsam veritatis? Fuga, illo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam temporibus veritatis odio praesentium maiores possimus amet inventore eius officia voluptatum rerum impedit tenetur ipsam vero blanditiis, soluta assumenda, enim dolorem."
+  },
+  {
+    "id": 3,
+    "name": "Focus Paper Refill",
+    "link": "focus-paper-refill",
+    "price": 89,
+    "category": "pen",
+    "inStock": true,
+    "imageSrc": "/images/product-03.jpg",
+    "imageAlt": "Person using a pen to cross a task off a productivity paper card.",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore modi dignissimos deleniti repellat sint ipsum minima quo voluptate. Eaque numquam at vero blanditiis commodi ratione, iure ipsam veritatis? Fuga, illo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam temporibus veritatis odio praesentium maiores possimus amet inventore eius officia voluptatum rerum impedit tenetur ipsam vero blanditiis, soluta assumenda, enim dolorem."
+  },
+  {
+    "id": 4,
+    "name": "Machined Mechanical Pencil",
+    "link": "machined-mechanical-pencil",
+    "price": 35,
+    "category": "pen",
+    "inStock": true,
+    "imageSrc": "/images/product-04.jpg",
+    "imageAlt": "Hand holding black machined steel mechanical pencil with brass tip and top.",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore modi dignissimos deleniti repellat sint ipsum minima quo voluptate. Eaque numquam at vero blanditiis commodi ratione, iure ipsam veritatis? Fuga, illo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam temporibus veritatis odio praesentium maiores possimus amet inventore eius officia voluptatum rerum impedit tenetur ipsam vero blanditiis, soluta assumenda, enim dolorem."
+  },
+  {
+    "id": 5,
+    "name": "Focus Card Tray",
+    "link": "focus-card-tray",
+    "price": 64,
+    "category": "pen",
+    "inStock": false,
+    "imageSrc": "/images/product-05.jpg",
+    "imageAlt": "Paper card sitting upright in walnut card holder on desk.",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore modi dignissimos deleniti repellat sint ipsum minima quo voluptate. Eaque numquam at vero blanditiis commodi ratione, iure ipsam veritatis? Fuga, illo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam temporibus veritatis odio praesentium maiores possimus amet inventore eius officia voluptatum rerum impedit tenetur ipsam vero blanditiis, soluta assumenda, enim dolorem."
+  },
+  {
+    "id": 6,
+    "name": "Focus Multi-Pack",
+    "link": "focus-multi-pack",
+    "price": 39,
+    "category": "box",
+    "inStock": true,
+    "imageSrc": "/images/product-06.jpg",
+    "imageAlt": "Stack of 3 small drab green cardboard paper card refill boxes with white text.",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore modi dignissimos deleniti repellat sint ipsum minima quo voluptate. Eaque numquam at vero blanditiis commodi ratione, iure ipsam veritatis? Fuga, illo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam temporibus veritatis odio praesentium maiores possimus amet inventore eius officia voluptatum rerum impedit tenetur ipsam vero blanditiis, soluta assumenda, enim dolorem."
+  },
+  {
+    "id": 7,
+    "name": "Brass Scissors",
+    "link": "brass-scissors",
+    "price": 50,
+    "category": "scissors",
+    "inStock": true,
+    "imageSrc": "/images/product-07.jpg",
+    "imageAlt": "Brass scissors with geometric design, black steel finger holes, and included upright brass stand.",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore modi dignissimos deleniti repellat sint ipsum minima quo voluptate. Eaque numquam at vero blanditiis commodi ratione, iure ipsam veritatis? Fuga, illo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam temporibus veritatis odio praesentium maiores possimus amet inventore eius officia voluptatum rerum impedit tenetur ipsam vero blanditiis, soluta assumenda, enim dolorem."
+  },
+  {
+    "id": 8,
+    "name": "Focus Carry Pouch",
+    "link": "focus-carry-pouch",
+    "price": 32,
+    "category": "pen",
+    "inStock": true,
+    "imageSrc": "/images/product-08.jpg",
+    "imageAlt": "Textured gray felt pouch for paper cards with snap button flap and elastic pen holder loop.",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore modi dignissimos deleniti repellat sint ipsum minima quo voluptate. Eaque numquam at vero blanditiis commodi ratione, iure ipsam veritatis? Fuga, illo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam temporibus veritatis odio praesentium maiores possimus amet inventore eius officia voluptatum rerum impedit tenetur ipsam vero blanditiis, soluta assumenda, enim dolorem."
+  },
+  {
+    "id": 9,
+    "name": "New Pen",
+    "link": "new-pen",
+    "price": 44,
+    "category": "pen",
+    "inStock": true,
+    "imageSrc": "/images/product-04.jpg",
+    "imageAlt": "Lorem ipsum pen.",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore modi dignissimos deleniti repellat sint ipsum minima quo voluptate. Eaque numquam at vero blanditiis commodi ratione, iure ipsam veritatis? Fuga, illo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam temporibus veritatis odio praesentium maiores possimus amet inventore eius officia voluptatum rerum impedit tenetur ipsam vero blanditiis, soluta assumenda, enim dolorem."
+  }
+]
