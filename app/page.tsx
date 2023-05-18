@@ -1,5 +1,6 @@
+import { getProducts } from '@/utils/cms';
 import Product from '@/types/Product';
-import { getProducts } from '@/utils/db';
+import ProductItem from '@/components/loop-items/ProductItem';
 
 export default async function Home() {
   const products = await getProducts();
@@ -11,10 +12,7 @@ export default async function Home() {
 
         <ul className="product__list grid grid-cols-1 gap-x-6 gap-y-14  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {products.map((product: Product) => (
-            <li key={product.id}>
-              <h3>{product.name}</h3>
-              <img src={product.imageSrc} />
-            </li>
+            <ProductItem key={product.id} {...product} />
           ))}
         </ul>
       </div>

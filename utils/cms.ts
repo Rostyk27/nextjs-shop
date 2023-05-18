@@ -13,7 +13,7 @@ export const getProducts = async () => {
 
   // simulate slow connection to test loading state
   await new Promise(resolve => {
-    setTimeout(() => resolve(1), 500);
+    setTimeout(() => resolve(1), 250);
   });
 
   return products;
