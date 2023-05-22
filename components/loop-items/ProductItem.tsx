@@ -26,7 +26,7 @@ export default function ProductItem({
   };
 
   return (
-    <li id={`pid_${id}`} className="product">
+    <li className="product">
       <Link
         href={`/products/${link}`}
         tabIndex={-1}

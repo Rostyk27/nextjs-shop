@@ -1,9 +1,27 @@
-import { getProducts } from '@/utils/cms';
+import { getProducts, getProductsTotal } from '@/utils/cms';
 import Product from '@/types/Product';
-import ProductItem from '@/components/loop-items/ProductItem';
 
-export default async function Home() {
-  const products = await getProducts();
+import ProductItem from '@/components/loop-items/ProductItem';
+import Pagination from '@/components/product-filters/Pagination';
+
+interface HomeProps {
+  searchParams: {
+    page: string;
+  };
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  const totalProducts = await getProductsTotal();
+  const productsPerPage = 4;
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+  let currentPage = 1;
+  const searchParamsPage = parseInt(searchParams.page);
+  if (searchParamsPage >= 1 && searchParamsPage <= totalPages) {
+    currentPage = searchParamsPage;
+  }
+
+  const products = await getProducts(currentPage);
 
   return (
     <section className="products mb-20 lg:mb-24">
@@ -15,6 +33,15 @@ export default async function Home() {
             <ProductItem key={product.id} {...product} />
           ))}
         </ul>
+
+        {totalProducts > productsPerPage && (
+          <Pagination
+            {...{
+              totalPages,
+              currentPage,
+            }}
+          />
+        )}
       </div>
     </section>
   );
