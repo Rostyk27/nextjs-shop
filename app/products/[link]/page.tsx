@@ -1,8 +1,9 @@
+import { getProducts } from '@/utils/cms';
+import { notFound } from 'next/navigation';
+
 import ProductCategory from '@/components/product-parts/ProductCategory';
 import ProductImage from '@/components/product-parts/ProductImage';
 import ProductPrice from '@/components/product-parts/ProductPrice';
-import { getProducts } from '@/utils/cms';
-import { notFound } from 'next/navigation';
 
 interface ProductSingleProps {
   params: {
@@ -11,7 +12,7 @@ interface ProductSingleProps {
 }
 
 async function getProductByLink(link: string) {
-  const products = await getProducts();
+  const products = (await getProducts()).result;
   return products.find(product => product.link === link);
 }
 

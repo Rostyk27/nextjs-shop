@@ -1,6 +1,6 @@
 import Product from '@/types/Product';
 
-export const getProducts = async (page = 1) => {
+export const getProducts = async (page = 1, category = 'all') => {
   // direct fetch from json file in public folder
   const res = await fetch(process.env.API_URL + '/data.json');
   // fetch from api endpoint via route.ts in /api/products folder
@@ -16,12 +16,22 @@ export const getProducts = async (page = 1) => {
   //   setTimeout(() => resolve(1), 250);
   // });
 
-  const result = products.slice((page - 1) * 4, page * 4);
+  let filteredItems = products;
 
-  return result;
+  if (category !== 'all') {
+    filteredItems = filteredItems.filter(
+      product => product.category === category
+    );
+  }
+
+  const result = filteredItems.slice((page - 1) * 4, page * 4);
+
+  const total = filteredItems.length;
+
+  return { result, total };
 };
 
-export const getProductsTotal = async () => {
+export const getProductCategories = async () => {
   const res = await fetch(process.env.API_URL + '/data.json');
   const products: Product[] = await res.json();
 
@@ -29,22 +39,7 @@ export const getProductsTotal = async () => {
     throw new Error('Failed to fetch data');
   }
 
-  return products.length;
+  const categories = products.map(product => product.category);
+
+  return ['all', ...new Set(categories)];
 };
-
-// export const getProduct = async (link: string) => {
-//   const res = await fetch(process.env.API_URL + '/data.json');
-//   const products: Product[] = await res.json();
-
-//   if (!res.ok) {
-//     throw new Error('Failed to fetch data');
-//   }
-
-//   const product = products.find(product => product.link === link);
-
-//   if (!product) {
-//     throw new Error('Failed to fetch data');
-//   }
-
-//   return product;
-// }

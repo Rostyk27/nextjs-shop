@@ -1,6 +1,7 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import getAllSearchParams from '@/utils/allSearchParams';
 
 interface PaginationProps {
   totalPages: number;
@@ -12,10 +13,27 @@ export default function Pagination({
   currentPage,
 }: PaginationProps) {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const allSearchParams = getAllSearchParams(searchParams);
 
   const handlePageChange = (pageNumber: number) => {
     window.scrollTo(0, 0);
-    router.push('/?page=' + pageNumber);
+
+    let newUrl = '';
+
+    if (allSearchParams.includes('page=')) {
+      newUrl =
+        pathname +
+        '?' +
+        allSearchParams.replace(/page=\d+/, 'page=' + pageNumber);
+    } else if (allSearchParams === '') {
+      newUrl = pathname + '?page=' + pageNumber;
+    } else {
+      newUrl = pathname + '?' + allSearchParams + '&page=' + pageNumber;
+    }
+
+    router.push(newUrl);
   };
 
   return (
