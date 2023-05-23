@@ -41,79 +41,11 @@
     transform: translate(-50%, -50%);
   }
 
-  .a-0 {
-    @apply absolute bottom-0 left-0 right-0 top-0;
-  }
-
   .pointer-events-all {
     pointer-events: all;
   }
 
-  .pagination__item {
-    @apply mx-1 inline-flex h-[36px] min-w-[36px] select-none items-center justify-center text-sm font-bold leading-[36px] ring-1 ring-inset;
-  }
-
-  .form__error {
-    @apply mt-2 text-[12px] text-color-error;
-  }
-
-  .popup {
-    @apply fixed right-[24px] top-8 z-10 max-h-[calc(100vh-64px)] w-[560px] max-w-[calc(100%-48px)] overflow-y-auto rounded-lg bg-white pt-4 shadow-xl transition-all;
-
-    @media screen and (min-width: 1025px) {
-      right: 72px;
-    }
-
-    @media screen and (min-width: 1344px) {
-      right: calc((100% - 1200px) / 2);
-    }
-
-    &::-webkit-scrollbar {
-      width: 4px;
-    }
-  }
-
-  .checkbox_element {
-    @apply pointer-events-all inline-flex h-[22px] w-[22px] cursor-pointer select-none rounded-[6px] p-px text-center text-[20px] leading-[20px] text-white ring-1 ring-color-primary transition-all duration-200 hover:bg-color-primary hover:text-color-primary;
-
-    &.is_checked {
-      @apply bg-color-primary text-color-secondary;
-    }
-  }
-
-  .react-select {
-    &__control {
-      @extend .select;
-      @apply capitalize;
-      cursor: pointer !important;
-
-      &--menu-is-open {
-        @apply ring-2;
-      }
-    }
-
-    &__indicator {
-      width: 16px;
-      fill: var(--color-tertiary);
-    }
-
-    &__menu {
-      @apply my-2 rounded-md bg-white;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 4px 11px rgba(0, 0, 0, 0.1);
-
-      &-list {
-        @apply py-1;
-      }
-    }
-
-    &__option {
-      @apply px-3 py-2 capitalize text-color-secondary hover:bg-color-bg;
-      font-size: 14px !important;
-      cursor: pointer !important;
-
-      &--is-selected {
-        @apply bg-color-primary hover:bg-color-primary;
-      }
-    }
+  .a-0 {
+    @apply absolute bottom-0 left-0 right-0 top-0;
   }
 }
