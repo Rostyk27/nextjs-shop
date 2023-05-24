@@ -1,37 +1,28 @@
 'use client';
 
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import getAllSearchParams from '@/utils/allSearchParams';
+import { useRouter, usePathname } from 'next/navigation';
+import getSearchParamsString from '@/utils/searchParamsString';
 
-interface PaginationProps {
+type PaginationProps = {
   totalPages: number;
   currentPage: number;
-}
+};
 
-export default function Pagination({
-  totalPages,
-  currentPage,
-}: PaginationProps) {
+const Pagination = ({ totalPages, currentPage }: PaginationProps) => {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const allSearchParams = getAllSearchParams(searchParams);
 
   const handlePageChange = (pageNumber: number) => {
-    window.scrollTo(0, 0);
+    const params = new URLSearchParams(window.location.search);
+    const searchParamsString = getSearchParamsString(params);
 
-    let newUrl = '';
-
-    if (allSearchParams.includes('page=')) {
-      newUrl =
-        pathname +
-        '?' +
-        allSearchParams.replace(/page=\d+/, 'page=' + pageNumber);
-    } else if (allSearchParams === '') {
-      newUrl = pathname + '?page=' + pageNumber;
+    if (searchParamsString.includes('page=')) {
+      params.set('page', String(pageNumber));
     } else {
-      newUrl = pathname + '?' + allSearchParams + '&page=' + pageNumber;
+      params.append('page', String(pageNumber));
     }
+
+    const newUrl = `${pathname}?${params.toString()}`;
 
     router.push(newUrl);
   };
@@ -80,4 +71,6 @@ export default function Pagination({
       </button>
     </div>
   );
-}
+};
+
+export default Pagination;

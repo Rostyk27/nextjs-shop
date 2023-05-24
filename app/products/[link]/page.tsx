@@ -5,14 +5,14 @@ import ProductCategory from '@/components/product-parts/ProductCategory';
 import ProductImage from '@/components/product-parts/ProductImage';
 import ProductPrice from '@/components/product-parts/ProductPrice';
 
-interface ProductSingleProps {
+type ProductSingleProps = {
   params: {
     link: string;
   };
-}
+};
 
 async function getProductByLink(link: string) {
-  const products = (await getProducts()).result;
+  const products = (await getProducts({})).result;
   return products.find(product => product.link === link);
 }
 

@@ -5,15 +5,24 @@ import ProductItem from '@/components/loop-items/ProductItem';
 import Pagination from '@/components/product-filters/Pagination';
 import ProductFilteringBar from '@/components/product-filters/ProductFilteringBar';
 
-interface HomeProps {
+type HomeProps = {
   searchParams: {
     page: string;
+    search: string;
     category: string;
+    sort: string;
+    inStock: string;
   };
-}
+};
 
 export default async function Home({ searchParams }: HomeProps) {
   const categories = await getProductCategories();
+
+  let searchTerm = '';
+  const searchParamsSearch = searchParams.search;
+  if (searchParamsSearch) {
+    searchTerm = searchParamsSearch;
+  }
 
   let currentCategory = 'all';
   const searchParamsCategory = searchParams.category;
@@ -21,7 +30,26 @@ export default async function Home({ searchParams }: HomeProps) {
     currentCategory = searchParamsCategory;
   }
 
-  const totalProducts = (await getProducts(1, currentCategory)).total;
+  let currentSort = 'id';
+  const searchParamsSort = searchParams.sort;
+  if (searchParamsSort) {
+    currentSort = searchParamsSort;
+  }
+
+  let isInStock = false;
+  const searchParamsInStock = searchParams.inStock;
+  if (searchParamsInStock === 'true') {
+    isInStock = true;
+  }
+
+  const filterParams = {
+    search: searchTerm,
+    category: currentCategory,
+    sort: currentSort,
+    inStock: isInStock,
+  };
+
+  const totalProducts = (await getProducts({ filterParams })).total;
 
   const productsPerPage = 4;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
@@ -32,7 +60,8 @@ export default async function Home({ searchParams }: HomeProps) {
     currentPage = searchParamsPage;
   }
 
-  const products = (await getProducts(currentPage, currentCategory)).result;
+  const products = (await getProducts({ page: currentPage, filterParams }))
+    .result;
 
   return (
     <section className="products mb-20 lg:mb-24">
@@ -41,8 +70,11 @@ export default async function Home({ searchParams }: HomeProps) {
 
         <ProductFilteringBar
           {...{
+            searchTerm,
             categories,
             currentCategory,
+            currentSort,
+            isInStock,
           }}
         />
 
@@ -60,6 +92,8 @@ export default async function Home({ searchParams }: HomeProps) {
             }}
           />
         )}
+
+        {totalProducts === 0 && <p>No products found</p>}
       </div>
     </section>
   );
