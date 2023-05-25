@@ -12,8 +12,8 @@ const font = Montserrat({
 });
 
 export const metadata = {
-  title: 'NextJS Shop',
-  description: 'NextJS Shop Application',
+  title: 'Next.js 13 - Shop',
+  description: 'Next.js 13 - Shop (App Router)',
 };
 
 export default function RootLayout({

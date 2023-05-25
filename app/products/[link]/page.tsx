@@ -1,4 +1,4 @@
-import { getProduct } from '@/utils/cms';
+import { getProductBySlug } from '@/utils/cms';
 
 import ProductCategory from '@/components/product-parts/ProductCategory';
 import ProductImage from '@/components/product-parts/ProductImage';
@@ -11,7 +11,7 @@ type ProductSingleProps = {
 };
 
 export default async function ProductSingle({ params }: ProductSingleProps) {
-  const product = await getProduct(params.link);
+  const product = await getProductBySlug(params.link);
 
   if (!product) {
     return;

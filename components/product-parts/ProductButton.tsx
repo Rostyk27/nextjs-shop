@@ -1,47 +1,67 @@
-'use client';
+import { getProductById } from '@/utils/cms';
+import { cookies } from 'next/headers';
 
-import { useState } from 'react';
-
-interface ProductButtonProps {
+type ProductButtonProps = {
   id: number;
   inStock: boolean;
-  // addToCart: (productId: number, productQuantity?: number) => void;
-  addToCart: any;
   addToCartQuantity?: number;
-}
+};
 
-export default function ProductButton({
+export default async function ProductButton({
   id,
   inStock,
-  addToCart,
   addToCartQuantity = 1,
 }: ProductButtonProps) {
-  const [buttonText, setButtonText] = useState('Add to cart');
+  const cookieShop = cookies();
+  const cartItems = cookieShop.get('cart-items');
+  const productToAdd = await getProductById(id);
 
-  const handleButtonTextChange = () => {
-    setButtonText('Added!');
+  const handleAddToCart = async (data: FormData) => {
+    'use server';
 
-    setTimeout(() => {
-      setButtonText('Add to cart');
-    }, 1000);
+    const productId = data.get('productId') as unknown as number;
+    const productQuantity = data.get('productQuantity') as unknown as number;
+
+    if (productToAdd) {
+      /* @ts-ignore */
+      cookies().set('product-id', productToAdd.id);
+      console.log(productToAdd.id);
+      // const existingCartItem = cartItems.find(
+      //   item => item.product.id === productId
+      // );
+      // if (existingCartItem) {
+      //   setCartItems(
+      //     cartItems.map(item =>
+      //       item.product.id === productId
+      //         ? { ...item, quantity: item.quantity + productQuantity }
+      //         : item
+      //     )
+      //   );
+      // } else {
+      //   setCartItems([
+      //     ...cartItems,
+      //     { product: productToAdd, quantity: productQuantity },
+      //   ]);
+      // }
+    }
   };
 
   return (
     <>
       {inStock ? (
-        <button
-          type="button"
-          className="button"
-          disabled={buttonText === 'Added!'}
-          onClick={() => {
-            addToCart(id, addToCartQuantity);
-            handleButtonTextChange();
-          }}
-        >
-          {buttonText}
-        </button>
+        <form action={handleAddToCart}>
+          <input type="hidden" name="productId" value={id} />
+          <input
+            type="hidden"
+            name="producproductQuantitytId"
+            value={addToCartQuantity}
+          />
+          <button type="submit" className="button">
+            Add to cart
+          </button>
+        </form>
       ) : (
-        <button className="button" disabled type="button">
+        <button type="button" className="button" disabled>
           Out of stock
         </button>
       )}

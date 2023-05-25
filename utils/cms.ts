@@ -91,7 +91,7 @@ export const getProductCategories = async () => {
   return ['all', ...new Set(categories)];
 };
 
-export const getProduct = async (link: string) => {
+export const getProductBySlug = async (slug: string) => {
   const res = await fetch(process.env.API_URL + '/data.json');
   const products: Product[] = await res.json();
 
@@ -99,7 +99,20 @@ export const getProduct = async (link: string) => {
     throw new Error('Failed to fetch data');
   }
 
-  const product = products.find(product => product.link === link);
+  const product = products.find(product => product.link === slug);
+
+  return product;
+};
+
+export const getProductById = async (id: number) => {
+  const res = await fetch(process.env.API_URL + '/data.json');
+  const products: Product[] = await res.json();
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const product = products.find(product => product.id === id);
 
   return product;
 };

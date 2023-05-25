@@ -1,13 +1,10 @@
-// import { useContext } from 'react';
-// import { AddToCartContext } from '../AddToCartContext';
+import Product from '@/types/Product';
 import Link from 'next/link';
 
 import ProductImage from '@/components/product-parts/ProductImage';
 import ProductCategory from '@/components/product-parts/ProductCategory';
 import ProductPrice from '@/components/product-parts/ProductPrice';
 import ProductButton from '@/components/product-parts/ProductButton';
-
-import Product from '@/types/Product';
 
 export default function ProductItem({
   id,
@@ -19,12 +16,6 @@ export default function ProductItem({
   imageSrc,
   imageAlt,
 }: Product) {
-  // const addToCart = useContext(AddToCartContext);
-
-  const addToCart = async () => {
-    'use server';
-  };
-
   return (
     <li className="product">
       <Link
@@ -51,7 +42,8 @@ export default function ProductItem({
 
       <ProductPrice price={price} />
 
-      <ProductButton id={id} inStock={inStock} addToCart={addToCart} />
+      {/* @ts-expect-error Async Server Component */}
+      <ProductButton id={id} inStock={inStock} />
     </li>
   );
 }
