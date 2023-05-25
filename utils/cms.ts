@@ -90,3 +90,16 @@ export const getProductCategories = async () => {
 
   return ['all', ...new Set(categories)];
 };
+
+export const getProduct = async (link: string) => {
+  const res = await fetch(process.env.API_URL + '/data.json');
+  const products: Product[] = await res.json();
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const product = products.find(product => product.link === link);
+
+  return product;
+};

@@ -1,5 +1,4 @@
-import { getProducts } from '@/utils/cms';
-import { notFound } from 'next/navigation';
+import { getProduct } from '@/utils/cms';
 
 import ProductCategory from '@/components/product-parts/ProductCategory';
 import ProductImage from '@/components/product-parts/ProductImage';
@@ -11,22 +10,17 @@ type ProductSingleProps = {
   };
 };
 
-async function getProductByLink(link: string) {
-  const products = (await getProducts({})).result;
-  return products.find(product => product.link === link);
-}
-
 export default async function ProductSingle({ params }: ProductSingleProps) {
-  const product = await getProductByLink(params.link);
+  const product = await getProduct(params.link);
 
   if (!product) {
-    notFound();
+    return;
   }
 
   return (
     <div className="product__single mb-20 md:mb-24">
       <div className="container">
-        <h1>{product?.name}</h1>
+        <h1>{product.name}</h1>
 
         <div className="max-w-[940px] md:flex">
           <ProductImage
