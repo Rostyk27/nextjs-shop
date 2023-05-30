@@ -3,7 +3,8 @@ import { Montserrat } from 'next/font/google';
 import '@material-symbols/font-700';
 
 import Footer from '@/components/footer/Footer';
-import Header from '@/components/Header';
+import Header from '@/components/header/Header';
+import Cart from '@/components/cart/Cart';
 
 const font = Montserrat({
   display: 'swap',
@@ -24,7 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`flex min-h-screen flex-col ${font.className}`}>
-        <Header totalCartItems={0} onShowCart={() => {}} />
+        <Header />
+
+        {/* @ts-expect-error Async Server Component */}
+        <Cart />
 
         <main
           id="main"
