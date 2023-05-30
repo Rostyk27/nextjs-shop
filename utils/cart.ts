@@ -1,27 +1,22 @@
 'use server';
 
+import { cookies } from 'next/headers';
 import { getProductById } from './cms';
 import { revalidatePath } from 'next/cache';
-import { cookies } from 'next/headers';
 
 export const useCartItems = async () => {
   type cartItemsType = {
     id: number;
-    quantity: number;
+    qty: number;
   }[];
 
   const cookieShop = cookies();
-  const cartItemsValue = cookieShop.get('cart-items')?.value;
-  const cartItems =
-    cartItemsValue &&
-    (JSON.parse(JSON.stringify(cartItemsValue)) as unknown as cartItemsType);
+  const cartItems = cookieShop.get('cart-items')?.value;
 
   let parsedCartItems = [] as cartItemsType;
 
-  if (cartItems) {
-    if (typeof cartItems === 'string') {
-      parsedCartItems = JSON.parse(cartItems) as cartItemsType;
-    }
+  if (cartItems && typeof cartItems === 'string') {
+    parsedCartItems = JSON.parse(cartItems) as cartItemsType;
   }
 
   return parsedCartItems;
@@ -29,13 +24,8 @@ export const useCartItems = async () => {
 
 export const addToCart = async (data: FormData) => {
   const cartItems = await useCartItems();
-
-  const productId = parseInt(
-    (data.get('productId') as unknown as number).toString()
-  );
-  const productQuantity = parseInt(
-    (data.get('productQuantity') as unknown as number).toString()
-  );
+  const productId = parseInt(data.get('productId') as string);
+  const productQuantity = parseInt(data.get('productQuantity') as string);
   const productToAdd = await getProductById(productId);
 
   if (productToAdd) {
@@ -51,7 +41,7 @@ export const addToCart = async (data: FormData) => {
           JSON.stringify(
             cartItems.map(item =>
               item.id === productId
-                ? { ...item, quantity: item.quantity + productQuantity }
+                ? { ...item, qty: item.qty + productQuantity }
                 : item
             )
           )
@@ -62,7 +52,7 @@ export const addToCart = async (data: FormData) => {
           'cart-items',
           JSON.stringify([
             ...cartItems,
-            { id: productToAdd.id, quantity: productQuantity },
+            { id: productToAdd.id, qty: productQuantity },
           ])
         );
       }
@@ -70,7 +60,7 @@ export const addToCart = async (data: FormData) => {
       /* @ts-ignore */
       cookies().set(
         'cart-items',
-        JSON.stringify([{ id: productToAdd.id, quantity: productQuantity }])
+        JSON.stringify([{ id: productToAdd.id, qty: productQuantity }])
       );
     }
 
