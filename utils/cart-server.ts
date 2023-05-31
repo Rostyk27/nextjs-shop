@@ -101,6 +101,7 @@ export const addToCart = async (data: FormData) => {
       );
     }
 
+    setProductQty(productId, 1);
     revalidatePath('/');
   }
 };
@@ -117,4 +118,34 @@ export const removeFromCart = async (productId: number) => {
   }
 
   revalidatePath('/');
+};
+
+export const useProductQty = async (productId: number) => {
+  const cookieShop = cookies();
+  const currentProduct = cookieShop.get('product-' + productId)?.value;
+  let productQty;
+
+  if (currentProduct && typeof currentProduct === 'string') {
+    productQty = parseInt(currentProduct);
+  } else {
+    productQty = 1;
+  }
+
+  return productQty;
+};
+
+export const setProductQty = async (productId: number, qty: number) => {
+  /* @ts-ignore */
+  cookies().set('product-' + productId, qty);
+};
+
+export const increaseProductQty = async (productId: number) => {
+  const productQty = await useProductQty(productId);
+  setProductQty(productId, productQty + 1);
+};
+
+export const decreaseProductQty = async (productId: number) => {
+  const productQty = await useProductQty(productId);
+  if (productQty === 1) return;
+  setProductQty(productId, productQty - 1);
 };

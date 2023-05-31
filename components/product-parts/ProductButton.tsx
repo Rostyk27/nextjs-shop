@@ -3,24 +3,20 @@ import { addToCart } from '@/utils/cart-server';
 type ProductButtonProps = {
   id: number;
   inStock: boolean;
-  addToCartQuantity?: number;
+  addToCartQty?: number;
 };
 
 export default async function ProductButton({
   id,
   inStock,
-  addToCartQuantity = 1,
+  addToCartQty = 1,
 }: ProductButtonProps) {
   return (
     <>
       {inStock ? (
         <form action={addToCart}>
           <input type="hidden" name="productId" value={id} />
-          <input
-            type="hidden"
-            name="productQuantity"
-            value={addToCartQuantity}
-          />
+          <input type="hidden" name="productQuantity" value={addToCartQty} />
           <button type="submit" className="button">
             Add to cart
           </button>

@@ -1,7 +1,8 @@
 'use client';
 
 import Product from '@/types/Product';
-import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import { openCart, closeCart, useCartOpen } from '@/utils/cart-client';
 
 import Link from 'next/link';
@@ -21,6 +22,7 @@ const Header = ({
   totalCartPrice,
   handleRemoveFromCart,
 }: HeaderProps) => {
+  const pathname = usePathname();
   const [isCartOpen, setIsCartOpen] = useState(useCartOpen());
 
   const handleOpenCart = () => {
@@ -32,6 +34,18 @@ const Header = ({
     closeCart();
     setIsCartOpen(false);
   };
+
+  useEffect(() => {
+    if (totalCartItems === 0 && isCartOpen === true) {
+      handleCloseCart();
+    }
+  }, [totalCartItems]);
+
+  useEffect(() => {
+    if (isCartOpen === true) {
+      handleCloseCart();
+    }
+  }, [pathname]);
 
   return (
     <header className="fixed left-0 right-0 top-0 z-10 bg-color-primary">

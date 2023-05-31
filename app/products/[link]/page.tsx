@@ -3,6 +3,13 @@ import { getProductBySlug } from '@/utils/cms';
 import ProductCategory from '@/components/product-parts/ProductCategory';
 import ProductImage from '@/components/product-parts/ProductImage';
 import ProductPrice from '@/components/product-parts/ProductPrice';
+import ProductButton from '@/components/product-parts/ProductButton';
+import {
+  useProductQty,
+  increaseProductQty,
+  decreaseProductQty,
+} from '@/utils/cart-server';
+import ProductQtyControls from '@/components/product-parts/ProductQtyControls';
 
 type ProductSingleProps = {
   params: {
@@ -16,6 +23,8 @@ export default async function ProductSingle({ params }: ProductSingleProps) {
   if (!product) {
     return;
   }
+
+  const productQty = await useProductQty(product.id);
 
   return (
     <div className="product__single mb-20 md:mb-24">
@@ -39,22 +48,23 @@ export default async function ProductSingle({ params }: ProductSingleProps) {
             <ProductPrice price={product.price} />
 
             <div className="flex items-center pt-3 lg:pt-5">
-              {/* {product.inStock && (
+              {product.inStock && (
                 <div className="mr-7">
-                  <ProductQuantityControls
+                  <ProductQtyControls
                     id={product.id}
-                    quantity={productQuantity}
-                    onQuantityChange={handleQuantityChange}
+                    quantity={productQty}
+                    onQtyIncrease={increaseProductQty}
+                    onQtyDecrease={decreaseProductQty}
                   />
                 </div>
               )}
 
+              {/* @ts-expect-error Async Server Component */}
               <ProductButton
                 id={product.id}
                 inStock={product.inStock}
-                addToCart={addToCart}
-                addToCartQuantity={productQuantity}
-              /> */}
+                addToCartQty={productQty}
+              />
             </div>
           </div>
         </div>

@@ -6,12 +6,12 @@ const Footer = () => {
       <ul className="container flex items-center justify-between">
         <FooterLink
           link="https://nextjs.org/"
-          title="Made with NextJS"
+          title="Made with Next.js"
           icon="code"
         />
 
         <FooterLink
-          link="https://github.com/Rostyk27"
+          link="https://github.com/Rostyk27/nextjs-shop"
           title="Source code"
           icon="deployed_code"
         />
