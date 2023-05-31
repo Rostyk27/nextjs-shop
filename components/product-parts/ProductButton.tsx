@@ -1,4 +1,4 @@
-import { addToCart } from '@/utils/cart';
+import { addToCart } from '@/utils/cart-server';
 
 type ProductButtonProps = {
   id: number;

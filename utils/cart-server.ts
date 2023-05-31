@@ -5,29 +5,6 @@ import { cookies } from 'next/headers';
 import { getProductById } from './cms';
 import { revalidatePath } from 'next/cache';
 
-export const useCartOpen = () => {
-  const cookieShop = cookies();
-  const cartOpen = cookieShop.get('cart-open')?.value;
-
-  if (cartOpen === 'true') {
-    return true;
-  }
-
-  return false;
-};
-
-export const openCart = () => {
-  /* @ts-ignore */
-  cookies().set('cart-open', 'true');
-  revalidatePath('/');
-};
-
-export const closeCart = () => {
-  /* @ts-ignore */
-  cookies().set('cart-open', 'false');
-  revalidatePath('/');
-};
-
 export const useCartItems = async () => {
   type cartItemsType = {
     id: number;
@@ -126,4 +103,18 @@ export const addToCart = async (data: FormData) => {
 
     revalidatePath('/');
   }
+};
+
+export const removeFromCart = async (productId: number) => {
+  const cartItems = await useCartItems();
+
+  if (cartItems) {
+    /* @ts-ignore */
+    cookies().set(
+      'cart-items',
+      JSON.stringify(cartItems.filter(item => item.id !== productId))
+    );
+  }
+
+  revalidatePath('/');
 };

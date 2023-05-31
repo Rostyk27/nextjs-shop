@@ -2,9 +2,15 @@ import '@/styles/global.scss';
 import { Montserrat } from 'next/font/google';
 import '@material-symbols/font-700';
 
+import {
+  removeFromCart,
+  useCartProducts,
+  useCartTotal,
+  useCartTotalPrice,
+} from '@/utils/cart-server';
+
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
-import Cart from '@/components/cart/Cart';
 
 const font = Montserrat({
   display: 'swap',
@@ -17,18 +23,24 @@ export const metadata = {
   description: 'Next.js 13 - Shop (App Router)',
 };
 
-export default function RootLayout({
-  children,
-}: {
+type RootLayoutProps = {
   children: React.ReactNode;
-}) {
+};
+
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const cartProducts = await useCartProducts();
+  const totalCartItems = await useCartTotal();
+  const totalCartPrice = await useCartTotalPrice();
+
   return (
     <html lang="en">
       <body className={`flex min-h-screen flex-col ${font.className}`}>
-        <Header />
-
-        {/* @ts-expect-error Async Server Component */}
-        <Cart />
+        <Header
+          cartProducts={cartProducts}
+          totalCartItems={totalCartItems}
+          totalCartPrice={totalCartPrice}
+          handleRemoveFromCart={removeFromCart}
+        />
 
         <main
           id="main"

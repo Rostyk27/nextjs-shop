@@ -1,20 +1,21 @@
 import Product from '@/types/Product';
-import Link from 'next/link';
 
+import Link from 'next/link';
 import ProductImage from '@/components/product-parts/ProductImage';
 // import ProductQuantityControls from '../product-parts/ProductQuantityControls';
 
+type CartItemProps = {
+  item: { product: Product; quantity: number };
+  isCartOpen: boolean;
+  onRemoveFromCart: (productId: number) => void;
+};
+
 export default function CartItem({
   item,
-  // onUpdateQuantity,
-  // onRemoveFromCart,
   isCartOpen,
-}: {
-  item: { product: Product; quantity: number };
-  // onUpdateQuantity: (productId: number, quantity: number) => void;
-  // onRemoveFromCart: (productId: number) => void;
-  isCartOpen: boolean;
-}) {
+  onRemoveFromCart,
+}: // onUpdateQuantity,
+CartItemProps) {
   const a11y = !isCartOpen && { tabIndex: -1, 'aria-hidden': true };
 
   return (
@@ -51,7 +52,7 @@ export default function CartItem({
             {...a11y}
             type="button"
             className="mr-[20px] flex hover:text-color-error"
-            // onClick={() => onRemoveFromCart(item.product.id)}
+            onClick={() => onRemoveFromCart(item.product.id)}
           >
             <span className="material-symbols-outlined text-[20px]">
               delete

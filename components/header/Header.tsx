@@ -1,10 +1,41 @@
+'use client';
+
+import Product from '@/types/Product';
+import { useState } from 'react';
+import { openCart, closeCart, useCartOpen } from '@/utils/cart-client';
+
 import Link from 'next/link';
 import HeaderButton from './HeaderButton';
+import Cart from '@/components/cart/Cart';
 
-const Header = () => {
+type HeaderProps = {
+  cartProducts: { product: Product; quantity: number }[];
+  totalCartItems: number;
+  totalCartPrice: number;
+  handleRemoveFromCart: (productId: number) => void;
+};
+
+const Header = ({
+  cartProducts,
+  totalCartItems,
+  totalCartPrice,
+  handleRemoveFromCart,
+}: HeaderProps) => {
+  const [isCartOpen, setIsCartOpen] = useState(useCartOpen());
+
+  const handleOpenCart = () => {
+    openCart();
+    setIsCartOpen(true);
+  };
+
+  const handleCloseCart = () => {
+    closeCart();
+    setIsCartOpen(false);
+  };
+
   return (
-    <header className="fixed left-0 right-0 top-0 z-10 bg-color-primary py-8">
-      <div className="container flex items-center justify-between">
+    <header className="fixed left-0 right-0 top-0 z-10 bg-color-primary">
+      <div className="container flex min-h-[100px] items-center justify-between">
         <Link
           href={'/'}
           className="flex items-center hover:text-color-tertiary"
@@ -12,9 +43,20 @@ const Header = () => {
           Shop app <span className="material-symbols-rounded ml-1">apps</span>
         </Link>
 
-        {/* @ts-expect-error Async Server Component */}
-        <HeaderButton />
+        <HeaderButton
+          totalCartItems={totalCartItems}
+          onOpenCart={handleOpenCart}
+        />
       </div>
+
+      <Cart
+        cartProducts={cartProducts}
+        isCartOpen={isCartOpen}
+        totalCartItems={totalCartItems}
+        totalCartPrice={totalCartPrice}
+        onCloseCart={handleCloseCart}
+        onRemoveFromCart={handleRemoveFromCart}
+      />
     </header>
   );
 };
