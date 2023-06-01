@@ -1,8 +1,8 @@
-interface FooterLinkProps {
+type FooterLinkProps = {
   link: string;
   title: string;
   icon: string;
-}
+};
 
 const FooterLink = ({ link, title, icon }: FooterLinkProps) => {
   return (

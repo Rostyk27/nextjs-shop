@@ -1,6 +1,6 @@
-interface ProductPriceProps {
+type ProductPriceProps = {
   price: number;
-}
+};
 
 export default function ProductPrice({ price }: ProductPriceProps) {
   return (

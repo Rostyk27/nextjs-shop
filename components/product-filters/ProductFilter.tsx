@@ -1,10 +1,10 @@
 import Select from 'react-select';
 
-interface ProductFilterProps {
+type ProductFilterProps = {
   categories: string[];
   selectedCategory: string;
   onCategoryChange: (category: string) => void;
-}
+};
 
 export default function ProductFilter({
   categories,

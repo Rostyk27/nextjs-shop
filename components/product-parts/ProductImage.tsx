@@ -1,13 +1,13 @@
 import Image from 'next/image';
 
-interface ProductImageProps {
+type ProductImageProps = {
   imageSrc: string;
   imageAlt: string;
   width?: number;
   height?: number;
   fill?: boolean;
   className?: string;
-}
+};
 
 export default function ProductImage({
   imageSrc,

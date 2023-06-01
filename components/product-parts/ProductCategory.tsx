@@ -1,6 +1,6 @@
-interface ProductCategoryProps {
+type ProductCategoryProps = {
   name: string;
-}
+};
 
 export default function ProductCategory({ name }: ProductCategoryProps) {
   return (
