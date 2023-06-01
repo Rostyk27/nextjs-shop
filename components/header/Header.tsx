@@ -1,8 +1,8 @@
 'use client';
 
 import Product from '@/types/Product';
-import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { openCart, closeCart, useCartOpen } from '@/utils/cart-client';
 
 import Link from 'next/link';
@@ -14,6 +14,8 @@ type HeaderProps = {
   totalCartItems: number;
   totalCartPrice: number;
   handleRemoveFromCart: (productId: number) => void;
+  useProductQty: boolean;
+  onResetQty: () => void;
 };
 
 const Header = ({
@@ -21,7 +23,10 @@ const Header = ({
   totalCartItems,
   totalCartPrice,
   handleRemoveFromCart,
+  useProductQty,
+  onResetQty,
 }: HeaderProps) => {
+  const router = useRouter();
   const pathname = usePathname();
   const [isCartOpen, setIsCartOpen] = useState(useCartOpen());
 
@@ -44,6 +49,11 @@ const Header = ({
   useEffect(() => {
     if (isCartOpen === true) {
       handleCloseCart();
+    }
+
+    if (useProductQty) {
+      onResetQty();
+      router.refresh();
     }
   }, [pathname]);
 

@@ -1,14 +1,14 @@
 import { getProductBySlug } from '@/utils/cms';
-
-import ProductCategory from '@/components/product-parts/ProductCategory';
-import ProductImage from '@/components/product-parts/ProductImage';
-import ProductPrice from '@/components/product-parts/ProductPrice';
-import ProductButton from '@/components/product-parts/ProductButton';
 import {
   useProductQty,
   increaseProductQty,
   decreaseProductQty,
 } from '@/utils/cart-server';
+
+import ProductCategory from '@/components/product-parts/ProductCategory';
+import ProductImage from '@/components/product-parts/ProductImage';
+import ProductPrice from '@/components/product-parts/ProductPrice';
+import ProductButton from '@/components/product-parts/ProductButton';
 import ProductQtyControls from '@/components/product-parts/ProductQtyControls';
 
 type ProductSingleProps = {

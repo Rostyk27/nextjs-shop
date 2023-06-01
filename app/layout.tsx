@@ -2,11 +2,15 @@ import '@/styles/global.scss';
 import { Montserrat } from 'next/font/google';
 import '@material-symbols/font-700';
 
+import { getProducts } from '@/utils/cms';
+
 import {
-  removeFromCart,
   useCartProducts,
   useCartTotal,
   useCartTotalPrice,
+  removeFromCart,
+  checkProductQty,
+  resetProductQty,
 } from '@/utils/cart-server';
 
 import Footer from '@/components/footer/Footer';
@@ -28,6 +32,8 @@ type RootLayoutProps = {
 };
 
 export default async function RootLayout({ children }: RootLayoutProps) {
+  const products = (await getProducts({})).result;
+  const useProductQty = await checkProductQty(products);
   const cartProducts = await useCartProducts();
   const totalCartItems = await useCartTotal();
   const totalCartPrice = await useCartTotalPrice();
@@ -40,6 +46,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           totalCartItems={totalCartItems}
           totalCartPrice={totalCartPrice}
           handleRemoveFromCart={removeFromCart}
+          useProductQty={useProductQty}
+          onResetQty={resetProductQty}
         />
 
         <main

@@ -101,7 +101,6 @@ export const addToCart = async (data: FormData) => {
       );
     }
 
-    setProductQty(productId, 1);
     revalidatePath('/');
   }
 };
@@ -148,4 +147,38 @@ export const decreaseProductQty = async (productId: number) => {
   const productQty = await useProductQty(productId);
   if (productQty === 1) return;
   setProductQty(productId, productQty - 1);
+};
+
+export const checkProductQty = async (
+  products: Product[]
+): Promise<boolean> => {
+  const cookieShop = cookies();
+
+  for (const product of products) {
+    const { id } = product;
+    const currentProduct = cookieShop.get('product-' + id)?.value;
+
+    if (currentProduct && parseInt(currentProduct) > 1) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+export const resetProductQty = async () => {
+  const cookieShop = cookies();
+
+  for (const key of cookieShop.getAll()) {
+    const name = key.name;
+    if (name.startsWith('product-')) {
+      const productId = name.replace('product-', '');
+      const value = parseInt(cookieShop.get(name)?.value as string);
+
+      if (value > 1) {
+        /* @ts-ignore */
+        cookies().set(name, '1');
+      }
+    }
+  }
 };
