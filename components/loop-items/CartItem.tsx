@@ -1,21 +1,26 @@
 import Product from '@/types/Product';
+import { useRouter } from 'next/navigation';
 
 import Link from 'next/link';
 import ProductImage from '@/components/product-parts/ProductImage';
-// import ProductQuantityControls from '../product-parts/ProductQuantityControls';
+import ProductQtyControls from '../product-parts/ProductQtyControls';
 
 type CartItemProps = {
   item: { product: Product; quantity: number };
   isCartOpen: boolean;
   onRemoveFromCart: (productId: number) => void;
+  addToCart: (productId: number, productQty?: number) => void;
+  decreaseFromCart: (productId: number) => void;
 };
 
-export default function CartItem({
+const CartItem = ({
   item,
   isCartOpen,
   onRemoveFromCart,
-}: // onUpdateQuantity,
-CartItemProps) {
+  addToCart,
+  decreaseFromCart,
+}: CartItemProps) => {
+  const router = useRouter();
   const a11y = !isCartOpen && { tabIndex: -1, 'aria-hidden': true };
 
   return (
@@ -52,20 +57,23 @@ CartItemProps) {
             {...a11y}
             type="button"
             className="mr-[20px] flex hover:text-color-error"
-            onClick={() => onRemoveFromCart(item.product.id)}
+            onClick={() => {
+              onRemoveFromCart(item.product.id);
+              router.refresh();
+            }}
           >
             <span className="material-symbols-outlined text-[20px]">
               delete
             </span>
           </button>
 
-          {item.quantity}
-          {/* <ProductQuantityControls
+          <ProductQtyControls
             a11y={a11y}
             id={item.product.id}
             quantity={item.quantity}
-            onQuantityChange={onUpdateQuantity}
-          /> */}
+            onQtyIncrease={addToCart}
+            onQtyDecrease={decreaseFromCart}
+          />
         </div>
 
         <strong className="w-[50px] text-center">
@@ -74,4 +82,6 @@ CartItemProps) {
       </div>
     </li>
   );
-}
+};
+
+export default CartItem;

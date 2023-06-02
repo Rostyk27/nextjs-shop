@@ -20,7 +20,11 @@ export const useCartItems = async () => {
     parsedCartItems = JSON.parse(cartItems) as cartItemsType;
   }
 
-  return parsedCartItems;
+  const sortedCartItems = parsedCartItems.sort((a, b) => {
+    return a.id - b.id;
+  });
+
+  return sortedCartItems;
 };
 
 export const useCartProducts = async () => {
@@ -39,7 +43,11 @@ export const useCartProducts = async () => {
     })
   );
 
-  return cartProducts;
+  const sortedCartProducts = cartProducts.sort((a, b) => {
+    return a.product.id - b.product.id;
+  });
+
+  return sortedCartProducts;
 };
 
 export const useCartTotal = async () => {
@@ -70,26 +78,26 @@ export const addToCart = async (productId: number, productQty: number = 1) => {
       );
 
       if (existingCartItem) {
-        /* @ts-ignore */
-        cookies().set(
-          'cart-items',
-          JSON.stringify(
-            cartItems.map(item =>
-              item.id === productId
-                ? { ...item, qty: item.qty + productQty }
-                : item
-            )
-          )
+        const updatedCartItems = cartItems.map(item =>
+          item.id === productId ? { ...item, qty: item.qty + productQty } : item
         );
+        const sortedCartItems = updatedCartItems.sort((a, b) => {
+          return a.id - b.id;
+        });
+
+        /* @ts-ignore */
+        cookies().set('cart-items', JSON.stringify(sortedCartItems));
       } else {
+        const updatedCartItems = [
+          ...cartItems,
+          { id: productToAdd.id, qty: productQty },
+        ];
+        const sortedCartItems = updatedCartItems.sort((a, b) => {
+          return a.id - b.id;
+        });
+
         /* @ts-ignore */
-        cookies().set(
-          'cart-items',
-          JSON.stringify([
-            ...cartItems,
-            { id: productToAdd.id, qty: productQty },
-          ])
-        );
+        cookies().set('cart-items', JSON.stringify(sortedCartItems));
       }
     } else {
       /* @ts-ignore */
@@ -97,6 +105,28 @@ export const addToCart = async (productId: number, productQty: number = 1) => {
         'cart-items',
         JSON.stringify([{ id: productToAdd.id, qty: productQty }])
       );
+    }
+  }
+};
+
+export const decreaseFromCart = async (productId: number) => {
+  const cartItems = await useCartItems();
+
+  if (cartItems) {
+    const existingCartItem = Object.values(cartItems).find(
+      item => item.id === productId
+    );
+
+    if (existingCartItem && existingCartItem.qty > 1) {
+      const updatedCartItems = cartItems.map(item =>
+        item.id === productId ? { ...item, qty: item.qty - 1 } : item
+      );
+      const sortedCartItems = updatedCartItems.sort((a, b) => {
+        return a.id - b.id;
+      });
+
+      /* @ts-ignore */
+      cookies().set('cart-items', JSON.stringify(sortedCartItems));
     }
   }
 };

@@ -1,5 +1,4 @@
 // import { useState, useEffect, useCallback } from 'react';
-// import { useLocation } from 'react-router-dom';
 
 import Product from '@/types/Product';
 
@@ -13,19 +12,22 @@ type CartProps = {
   totalCartPrice: number;
   onCloseCart: () => void;
   onRemoveFromCart: (productId: number) => void;
+  addToCart: (productId: number, productQty?: number) => void;
+  decreaseFromCart: (productId: number) => void;
 };
 
-export default function Cart({
+const Cart = ({
   cartProducts,
   isCartOpen,
   totalCartItems,
   totalCartPrice,
   onCloseCart,
   onRemoveFromCart,
+  addToCart,
+  decreaseFromCart,
 }: // onUpdateQuantity,
 // onClearCart,
-CartProps) {
-  // const location = useLocation();
+CartProps) => {
   const a11y = !isCartOpen && { tabIndex: -1, 'aria-hidden': true };
 
   // const [cartSuccessMessage, setCartSuccessMessage] = useState('');
@@ -33,23 +35,6 @@ CartProps) {
   // const handleSuccessMessage = (msg: string) => {
   //   setCartSuccessMessage(msg);
   // };
-
-  // const onHideCartCallback = useCallback(() => {
-  //   onHideCart();
-  // }, [onHideCart]);
-
-  // useEffect(() => {
-  //   if (totalCartItems === 0) {
-  //     onHideCartCallback();
-  //   }
-  // }, [totalCartItems, onHideCartCallback]);
-
-  // useEffect(() => {
-  //   if (isCartOpen) {
-  //     onHideCartCallback();
-  //   }
-  //   // eslint-disable-next-line
-  // }, [location]);
 
   return (
     <>
@@ -77,7 +62,8 @@ CartProps) {
                 item={item}
                 isCartOpen={isCartOpen}
                 onRemoveFromCart={onRemoveFromCart}
-                // onUpdateQuantity={onUpdateQuantity}
+                addToCart={addToCart}
+                decreaseFromCart={decreaseFromCart}
               />
             ))}
           </ul>
@@ -120,4 +106,6 @@ CartProps) {
       )} */}
     </>
   );
-}
+};
+
+export default Cart;

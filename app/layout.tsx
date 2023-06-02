@@ -11,6 +11,8 @@ import {
   removeFromCart,
   checkProductQty,
   resetProductQty,
+  addToCart,
+  decreaseFromCart,
 } from '@/utils/cart-server';
 
 import Footer from '@/components/footer/Footer';
@@ -32,7 +34,7 @@ type RootLayoutProps = {
 };
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const products = (await getProducts({})).result;
+  const products = (await getProducts({ page: -1 })).result;
   const useProductQty = await checkProductQty(products);
   const cartProducts = await useCartProducts();
   const totalCartItems = await useCartTotal();
@@ -48,6 +50,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           handleRemoveFromCart={removeFromCart}
           useProductQty={useProductQty}
           onResetQty={resetProductQty}
+          addToCart={addToCart}
+          decreaseFromCart={decreaseFromCart}
         />
 
         <main

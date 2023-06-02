@@ -16,6 +16,8 @@ type HeaderProps = {
   handleRemoveFromCart: (productId: number) => void;
   useProductQty: boolean;
   onResetQty: () => void;
+  addToCart: (productId: number, productQty?: number) => void;
+  decreaseFromCart: (productId: number) => void;
 };
 
 const Header = ({
@@ -25,6 +27,8 @@ const Header = ({
   handleRemoveFromCart,
   useProductQty,
   onResetQty,
+  addToCart,
+  decreaseFromCart,
 }: HeaderProps) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -80,6 +84,8 @@ const Header = ({
         totalCartPrice={totalCartPrice}
         onCloseCart={handleCloseCart}
         onRemoveFromCart={handleRemoveFromCart}
+        addToCart={addToCart}
+        decreaseFromCart={decreaseFromCart}
       />
     </header>
   );

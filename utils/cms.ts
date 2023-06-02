@@ -71,7 +71,11 @@ export const getProducts = async (params: GetProductsParams) => {
     });
   }
 
-  const result = filteredItems.slice((page - 1) * 4, page * 4);
+  let result = filteredItems;
+
+  if (page !== -1) {
+    result = filteredItems.slice((page - 1) * 4, page * 4);
+  }
 
   const total = filteredItems.length;
 

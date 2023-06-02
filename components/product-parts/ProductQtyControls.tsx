@@ -3,10 +3,12 @@
 import { useRouter } from 'next/navigation';
 
 type ProductQtyControlsProps = {
-  a11y?: {
-    tabIndex: number;
-    'aria-hidden': boolean;
-  };
+  a11y?:
+    | {
+        tabIndex: number;
+        'aria-hidden': boolean;
+      }
+    | boolean;
   id: number;
   quantity: number;
   onQtyIncrease: (productId: number) => void;
