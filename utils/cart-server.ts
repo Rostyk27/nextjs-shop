@@ -59,10 +59,8 @@ export const useCartTotalPrice = async () => {
   return totalPrice;
 };
 
-export const addToCart = async (data: FormData) => {
+export const addToCart = async (productId: number, productQty: number = 1) => {
   const cartItems = await useCartItems();
-  const productId = parseInt(data.get('productId') as string);
-  const productQuantity = parseInt(data.get('productQuantity') as string);
   const productToAdd = await getProductById(productId);
 
   if (productToAdd) {
@@ -78,7 +76,7 @@ export const addToCart = async (data: FormData) => {
           JSON.stringify(
             cartItems.map(item =>
               item.id === productId
-                ? { ...item, qty: item.qty + productQuantity }
+                ? { ...item, qty: item.qty + productQty }
                 : item
             )
           )
@@ -89,7 +87,7 @@ export const addToCart = async (data: FormData) => {
           'cart-items',
           JSON.stringify([
             ...cartItems,
-            { id: productToAdd.id, qty: productQuantity },
+            { id: productToAdd.id, qty: productQty },
           ])
         );
       }
@@ -97,11 +95,9 @@ export const addToCart = async (data: FormData) => {
       /* @ts-ignore */
       cookies().set(
         'cart-items',
-        JSON.stringify([{ id: productToAdd.id, qty: productQuantity }])
+        JSON.stringify([{ id: productToAdd.id, qty: productQty }])
       );
     }
-
-    revalidatePath('/');
   }
 };
 

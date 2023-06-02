@@ -1,5 +1,6 @@
 import { getProductBySlug } from '@/utils/cms';
 import {
+  addToCart,
   useProductQty,
   increaseProductQty,
   decreaseProductQty,
@@ -59,11 +60,11 @@ export default async function ProductSingle({ params }: ProductSingleProps) {
                 </div>
               )}
 
-              {/* @ts-expect-error Async Server Component */}
               <ProductButton
                 id={product.id}
                 inStock={product.inStock}
                 addToCartQty={productQty}
+                onAddToCart={addToCart}
               />
             </div>
           </div>

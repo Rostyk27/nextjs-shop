@@ -1,12 +1,13 @@
 import Product from '@/types/Product';
-import Link from 'next/link';
+import { addToCart } from '@/utils/cart-server';
 
+import Link from 'next/link';
 import ProductImage from '@/components/product-parts/ProductImage';
 import ProductCategory from '@/components/product-parts/ProductCategory';
 import ProductPrice from '@/components/product-parts/ProductPrice';
 import ProductButton from '@/components/product-parts/ProductButton';
 
-export default function ProductItem({
+const ProductItem = ({
   id,
   name,
   link,
@@ -15,7 +16,7 @@ export default function ProductItem({
   inStock,
   imageSrc,
   imageAlt,
-}: Product) {
+}: Product) => {
   return (
     <li className="product">
       <Link
@@ -42,8 +43,9 @@ export default function ProductItem({
 
       <ProductPrice price={price} />
 
-      {/* @ts-expect-error Async Server Component */}
-      <ProductButton id={id} inStock={inStock} />
+      <ProductButton id={id} inStock={inStock} onAddToCart={addToCart} />
     </li>
   );
-}
+};
+
+export default ProductItem;

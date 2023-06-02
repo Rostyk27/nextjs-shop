@@ -1,5 +1,5 @@
-import { getProducts, getProductCategories } from '@/utils/cms';
 import Product from '@/types/Product';
+import { getProducts, getProductCategories } from '@/utils/cms';
 
 import ProductItem from '@/components/loop-items/ProductItem';
 import Pagination from '@/components/product-filters/Pagination';
