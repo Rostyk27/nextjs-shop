@@ -6,6 +6,7 @@
 //   const productQty = parseInt(data.get('productQty') as string);
 //
 //   revalidatePath('/'); (do this to refresh the page after adding to cart)
+// import { revalidatePath } from 'next/cache';
 
 // type ProductButtonProps = {
 //   id: number;

@@ -3,7 +3,6 @@
 import Product from '@/types/Product';
 import { cookies } from 'next/headers';
 import { getProductById } from './cms';
-import { revalidatePath } from 'next/cache';
 
 export const useCartItems = async () => {
   type cartItemsType = {
@@ -141,8 +140,6 @@ export const removeFromCart = async (productId: number) => {
       JSON.stringify(cartItems.filter(item => item.id !== productId))
     );
   }
-
-  revalidatePath('/');
 };
 
 export const clearCart = async () => {
