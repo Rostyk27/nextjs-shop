@@ -6,11 +6,11 @@ type ProductFilterProps = {
   onCategoryChange: (category: string) => void;
 };
 
-export default function ProductFilter({
+const ProductFilter = ({
   categories,
   selectedCategory,
   onCategoryChange,
-}: ProductFilterProps) {
+}: ProductFilterProps) => {
   const categoryOptions = categories.map((category: string) => ({
     value: category,
     label: category,
@@ -35,4 +35,6 @@ export default function ProductFilter({
       />
     </div>
   );
-}
+};
+
+export default ProductFilter;

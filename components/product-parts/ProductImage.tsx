@@ -9,14 +9,14 @@ type ProductImageProps = {
   className?: string;
 };
 
-export default function ProductImage({
+const ProductImage = ({
   imageSrc,
   imageAlt,
   width,
   height,
   fill,
   className,
-}: ProductImageProps) {
+}: ProductImageProps) => {
   return (
     <figure
       className={`flex overflow-hidden rounded-lg${
@@ -36,4 +36,6 @@ export default function ProductImage({
       />
     </figure>
   );
-}
+};
+
+export default ProductImage;
