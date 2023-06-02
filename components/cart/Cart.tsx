@@ -1,9 +1,8 @@
-// import { useState, useEffect, useCallback } from 'react';
-
 import Product from '@/types/Product';
+import { useState } from 'react';
 
 import CartItem from '@/components/loop-items/CartItem';
-// import CartForm from './CartForm';
+import CartForm from './CartForm';
 
 type CartProps = {
   cartProducts: { product: Product; quantity: number }[];
@@ -14,6 +13,7 @@ type CartProps = {
   onRemoveFromCart: (productId: number) => void;
   addToCart: (productId: number, productQty?: number) => void;
   decreaseFromCart: (productId: number) => void;
+  clearCart: () => void;
 };
 
 const Cart = ({
@@ -25,16 +25,15 @@ const Cart = ({
   onRemoveFromCart,
   addToCart,
   decreaseFromCart,
-}: // onUpdateQuantity,
-// onClearCart,
-CartProps) => {
+  clearCart,
+}: CartProps) => {
   const a11y = !isCartOpen && { tabIndex: -1, 'aria-hidden': true };
 
-  // const [cartSuccessMessage, setCartSuccessMessage] = useState('');
+  const [cartSuccessMessage, setCartSuccessMessage] = useState('');
 
-  // const handleSuccessMessage = (msg: string) => {
-  //   setCartSuccessMessage(msg);
-  // };
+  const handleSuccessMessage = (msg: string) => {
+    setCartSuccessMessage(msg);
+  };
 
   return (
     <>
@@ -82,16 +81,16 @@ CartProps) => {
             </div>
           </div>
 
-          {/* <CartForm
+          <CartForm
             isCartOpen={isCartOpen}
-            onHideCart={onHideCart}
-            onClearCart={onClearCart}
+            onCloseCart={onCloseCart}
+            onClearCart={clearCart}
             cartSuccessMessage={handleSuccessMessage}
-          /> */}
+          />
         </div>
       )}
 
-      {/* {cartSuccessMessage.length > 0 && (
+      {cartSuccessMessage.length > 0 && (
         <div className="popup !py-12 px-7 text-center">
           {cartSuccessMessage}
 
@@ -103,7 +102,7 @@ CartProps) => {
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
-      )} */}
+      )}
     </>
   );
 };

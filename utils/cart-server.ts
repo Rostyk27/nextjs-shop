@@ -145,6 +145,11 @@ export const removeFromCart = async (productId: number) => {
   revalidatePath('/');
 };
 
+export const clearCart = async () => {
+  /* @ts-ignore */
+  cookies().set('cart-items', JSON.stringify([]));
+};
+
 export const useProductQty = async (productId: number) => {
   const cookieShop = cookies();
   const currentProduct = cookieShop.get('product-' + productId)?.value;

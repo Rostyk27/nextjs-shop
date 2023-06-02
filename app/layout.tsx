@@ -13,6 +13,7 @@ import {
   resetProductQty,
   addToCart,
   decreaseFromCart,
+  clearCart,
 } from '@/utils/cart-server';
 
 import Footer from '@/components/footer/Footer';
@@ -52,6 +53,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           onResetQty={resetProductQty}
           addToCart={addToCart}
           decreaseFromCart={decreaseFromCart}
+          clearCart={clearCart}
         />
 
         <main
