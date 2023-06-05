@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 type ProductButtonProps = {
@@ -17,18 +18,30 @@ const ProductButton = ({
 }: ProductButtonProps) => {
   const router = useRouter();
 
+  const [buttonText, setButtonText] = useState('Add to cart');
+
+  const handleButtonTextChange = () => {
+    setButtonText('Added!');
+
+    setTimeout(() => {
+      setButtonText('Add to cart');
+    }, 1000);
+  };
+
   return (
     <>
       {inStock ? (
         <button
           onClick={() => {
+            handleButtonTextChange();
             onAddToCart(id, addToCartQty);
             router.refresh();
           }}
           type="button"
           className="button"
+          disabled={buttonText === 'Added!'}
         >
-          Add to cart
+          {buttonText}
         </button>
       ) : (
         <button type="button" className="button" disabled>
