@@ -53,7 +53,7 @@ const Header = ({
   }, [totalCartItems]);
 
   useEffect(() => {
-    if (isCartOpen === true) {
+    if (isCartOpen) {
       handleCloseCart();
     }
 
