@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import Image from 'next/image';
 
 type ProductImageProps = {
@@ -18,11 +20,7 @@ const ProductImage = ({
   className,
 }: ProductImageProps) => {
   return (
-    <figure
-      className={`flex overflow-hidden rounded-lg${
-        className ? ' ' + className : ''
-      }`}
-    >
+    <figure className={clsx('flex overflow-hidden rounded-lg', className)}>
       <Image
         src={imageSrc}
         alt={imageAlt}

@@ -2,6 +2,7 @@
 
 import { useRouter, usePathname } from 'next/navigation';
 import getSearchParamsString from '@/utils/searchParamsString';
+import clsx from 'clsx';
 
 type PaginationProps = {
   totalPages: number;
@@ -33,11 +34,12 @@ const Pagination = ({ totalPages, currentPage }: PaginationProps) => {
         disabled={currentPage === 1}
         onClick={() => handlePageChange(currentPage - 1)}
         aria-label="Previous page"
-        className={`pagination__item ring-color-primary ${
+        className={clsx(
+          'pagination__item ring-color-primary',
           currentPage === 1
             ? 'cursor-default opacity-50'
             : 'hover:ring-color-tertiary'
-        }`}
+        )}
       >
         <span className="material-symbols-outlined">chevron_left</span>
       </button>
@@ -47,11 +49,12 @@ const Pagination = ({ totalPages, currentPage }: PaginationProps) => {
           key={index}
           onClick={() => handlePageChange(index + 1)}
           {...(index + 1 === currentPage && { 'aria-current': 'page' })}
-          className={`pagination__item ${
+          className={clsx(
+            'pagination__item',
             index + 1 === currentPage
               ? 'bg-color-tertiary text-white ring-color-tertiary'
               : 'ring-color-primary hover:ring-color-tertiary'
-          }`}
+          )}
         >
           {index + 1}
         </button>
@@ -61,11 +64,12 @@ const Pagination = ({ totalPages, currentPage }: PaginationProps) => {
         disabled={currentPage === totalPages}
         onClick={() => handlePageChange(currentPage + 1)}
         aria-label="Next page"
-        className={`pagination__item ring-color-primary ${
+        className={clsx(
+          'pagination__item ring-color-primary',
           currentPage === totalPages
             ? 'cursor-default opacity-50'
             : 'hover:ring-color-tertiary'
-        }`}
+        )}
       >
         <span className="material-symbols-outlined">chevron_right</span>
       </button>

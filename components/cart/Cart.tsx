@@ -1,5 +1,6 @@
 import Product from '@/types/Product';
 import { useState } from 'react';
+import clsx from 'clsx';
 
 import CartItem from '@/components/loop-items/CartItem';
 import CartForm from './CartForm';
@@ -39,11 +40,12 @@ const Cart = ({
     <>
       {totalCartItems > 0 && (
         <div
-          className={`popup ${
+          className={clsx(
+            'popup',
             isCartOpen
               ? 'pointer-events-all opacity-100'
               : 'pointer-events-none opacity-0'
-          }`}
+          )}
         >
           <button
             {...a11y}

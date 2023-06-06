@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 type ProductInStockProps = {
   inStockOnly: boolean;
   onInStockChange: (inStock: boolean) => void;
@@ -18,9 +20,10 @@ const ProductInStock = ({
         </small>
 
         <span
-          className={`material-symbols-outlined checkbox_element${
-            inStockOnly ? ' is_checked' : ''
-          }`}
+          className={clsx(
+            'material-symbols-outlined checkbox_element',
+            inStockOnly ? 'is_checked' : ''
+          )}
         >
           check
         </span>
