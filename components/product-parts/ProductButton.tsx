@@ -19,12 +19,15 @@ const ProductButton = ({
   const router = useRouter();
 
   const [buttonText, setButtonText] = useState('Add to cart');
+  const [isAdded, setIsAdded] = useState(false);
 
   const handleButtonTextChange = () => {
     setButtonText('Added!');
+    setIsAdded(true);
 
     setTimeout(() => {
       setButtonText('Add to cart');
+      setIsAdded(false);
     }, 1000);
   };
 
@@ -39,7 +42,7 @@ const ProductButton = ({
           }}
           type="button"
           className="button"
-          disabled={buttonText === 'Added!'}
+          disabled={isAdded}
         >
           {buttonText}
         </button>
