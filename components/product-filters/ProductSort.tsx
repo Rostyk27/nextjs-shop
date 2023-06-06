@@ -5,15 +5,15 @@ type ProductSortProps = {
   onSortChange: (sort: string) => void;
 };
 
-const ProductSort = ({ selectedSort, onSortChange }: ProductSortProps) => {
-  const sortOptions = [
-    { value: 'id', label: 'Default' },
-    { value: 'name-asc', label: 'Name A-Z' },
-    { value: 'name-desc', label: 'Name Z-A' },
-    { value: 'price-asc', label: 'Price increase' },
-    { value: 'price-desc', label: 'Price decrease' },
-  ];
+const sortOptions = [
+  { value: 'id', label: 'Default' },
+  { value: 'name-asc', label: 'Name A-Z' },
+  { value: 'name-desc', label: 'Name Z-A' },
+  { value: 'price-asc', label: 'Price increase' },
+  { value: 'price-desc', label: 'Price decrease' },
+];
 
+const ProductSort = ({ selectedSort, onSortChange }: ProductSortProps) => {
   return (
     <div>
       <label>
