@@ -28,7 +28,7 @@ const ProductItem = ({
         <ProductImage
           imageSrc={imageSrc}
           imageAlt={imageAlt}
-          fill={true}
+          fill
           className="aspect-h-1 aspect-w-1 w-full bg-color-bg xl:aspect-h-8 xl:aspect-w-7"
         />
       </Link>
